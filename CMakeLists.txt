@@ -1,51 +1,29 @@
-cmake_minimum_required(VERSION 3.0.2)
+cmake_minimum_required(VERSION 2.8.3)
+
 project(hack_my_robot)
 
-
 find_package(catkin REQUIRED COMPONENTS
-  dynamic_reconfigure
-  message_generation
+  actionlib
+  geometry_msgs
+  move_base_msgs
   rospy
+  smach
   std_msgs
 )
 
 catkin_python_setup()
 
-add_message_files(
-  FILES
-  smartCommonData.msg
-)
-
-generate_messages(
-  DEPENDENCIES 
-  std_msgs
-)
-
-generate_dynamic_reconfigure_options(
-  cfg/smartCommon.cfg 
-)
-
 catkin_package(
-  INCLUDE_DIRS
   LIBRARIES ${PROJECT_NAME}
-  CATKIN_DEPENDS rospy std_msgs dynamic_reconfigure message_runtime 
-  DEPENDS
+  CATKIN_DEPENDS actionlib geometry_msgs move_base_msgs rospy smach std_msgs
 )
 
-###########
-## Build ##
-###########
-
-include_directories(
-  ${catkin_INCLUDE_DIRS}
+catkin_install_python(
+  PROGRAMS nodes/hack_my_robot
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
-
-#############
-## Install ##
-#############
 
 # Install launch files
-install(
-  DIRECTORY launch cfg
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+install(DIRECTORY launch/
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
 )
