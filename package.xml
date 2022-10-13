@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>smart_python_ros_node</name>
+  <name>hack_my_robot</name>
   <version>0.0.1</version>
-  <description>Use it as a general template to create a python ROS node</description>
+  <description>Main routine for hack my robot competition</description>
  
   <maintainer email="samuel.prieto@nyu.edu">Samuel A. Prieto</maintainer>
   <author email="samuel.prieto@nyu.edu">Samuel A. Prieto</author>

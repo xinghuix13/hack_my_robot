@@ -2,13 +2,13 @@
 
 import rospy
 
-from smart_python_ros_node.module_to_import import smartCommonClass
+from hack_my_robot.hack_my_robot_routine import smartCommonClass
 
 # Define a main function and then call it
 def main():
     # Initialize node and name it
-    rospy.init_node("smart_python_ros_node")
-    rospy.loginfo("SMART common node")
+    rospy.init_node("hack_my_robot")
+    rospy.loginfo("Hack My Robot main routine")
     # Go to class functions that do all the heavy lifting
     try:
         smartCommonClass()
