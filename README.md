@@ -1,1 +1,1 @@
-# smart_python_ros_node
+# Hack My Robot main routine
