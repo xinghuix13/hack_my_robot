@@ -1,0 +1,20 @@
+<launch>
+
+  <!-- Incluir el navigation launch -->
+  
+  <!-- Node to save images -->
+  <node pkg="image_view" type="image_saver" name"image_saver" output="screen">
+    <remap from="image" to "/camera/image"/>
+    <param name="save_all_image" value="false"/>
+    <param name="filename_format" value="$(find hack_my_robot)/images/image_%04d.png"/>
+
+  <!-- Hack my robot main routine -->
+  <node pkg="hack_my_robot" type="hack_my_robot_node" name="hack_my_robot" output="screen" clear_params="true">
+    <param name="goal_frame_id" value="map"/>
+    <param name="odom_frame_id" value="odom"/>
+    <param name="base_frame_id" value="base_footprint"/>
+    <param name="addpose_topic" value="/addpose"/>
+    <param name="posearray_topic" value="/waypoints"/>
+  </node>
+
+</launch>

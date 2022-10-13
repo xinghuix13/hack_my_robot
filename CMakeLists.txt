@@ -19,7 +19,7 @@ catkin_package(
 )
 
 catkin_install_python(
-  PROGRAMS nodes/hack_my_robot
+  PROGRAMS nodes/hack_my_robot_node
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
