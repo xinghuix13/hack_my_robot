@@ -8,6 +8,7 @@ from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from geometry_msgs.msg import PoseWithCovarianceStamped, PoseArray ,PointStamped
 from std_msgs.msg import Empty
 from std_srvs.srv import Trigger, TriggerResponse
+from std_srvs.srv import Empty as Emptysrv
 from tf import TransformListener
 import tf
 import math
@@ -16,7 +17,7 @@ import csv
 import time
 from geometry_msgs.msg import PoseStamped
 
-with_camera = False
+with_camera = True
 counter = 0
 number_of_scans = 3
 
@@ -32,22 +33,24 @@ def start_scan_response():
     try:
         if with_camera == True:
             rospy.loginfo("Connecting to the 'picture taking' service.")
-            # rospy.wait_for_service('/start_measurement') # TAKE PICTURE SERVICE
+            rospy.wait_for_service('/image_saver/save') # TAKE PICTURE SERVICE
             rospy.loginfo("Taking the picture!.")
-            # start_scan_srv = rospy.ServiceProxy('/start_measurement', startMeasurement) # TAKE PICTURE SERVICE
-            # resp1 = start_scan_srv(True, True, True, 'LDR', 'low', 'uncolorize') # TAKE PICTURE SERVICE
+            take_pic_srv = rospy.ServiceProxy('/image_saver/save', Emptysrv) # TAKE PICTURE SERVICE
+            resp1 = take_pic_srv() # TAKE PICTURE SERVICE
         else:
             rospy.loginfo("Simulating to take a picture.")
             rospy.sleep(2)
 
         rospy.loginfo("Service finished.")
         rospy.loginfo("Counter = %s" % counter)
-        counter += 1
+        rospy.loginfo("Number of scans = %s" % number_of_scans)
         if (counter % number_of_scans) == 0:
             rospy.loginfo("Round finished. Storing the temporal data inside the vault")
             rospy.loginfo("Number of scans= %s" % number_of_scans)
-            rospy.loginfo("Counter= %s" % counter)
+            rospy.loginfo("Counter= %s \n" % counter)
           
+        counter += 1
+
         if with_camera == True:
             return True
             # return resp1.success
