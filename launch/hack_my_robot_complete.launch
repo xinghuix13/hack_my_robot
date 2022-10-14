@@ -1,7 +1,5 @@
 <launch>
 
-  <!-- Incluir el navigation launch -->
-  
   <!-- Node to save images -->
   <node pkg="image_view" type="image_saver" name="image_saver" output="log">
     <remap from="image" to="/camera/image"/>
