@@ -76,8 +76,9 @@ roslaunch hack_my_robot hack_my_robot_complete.launch
 ![](doc/images/2022-10-17-10-37-55.png)
 4. Launch the keyboard teleoperation node in order to move your robot around so it can locate iself on the map (just spinning around should be enough).
 5. Once the robot has located itself, we need to change the functionality of the 2D Pose Estimate button. We will use the same tool in order to provide our robot the 3 waypoints needed for the Hack My Robot main routine. 
-   * Go to the Panels view and make the "Tools Properties" panel active.
+   * Go to the Panels dropdown menu and make the "Tools Properties" panel active.
    * Change the topic of the 2D Pose Estimate tool from */initialpose* to */addpose*
+    ![](doc/images/2022-10-17-11-04-31.png) 
    * Close the panel. 
 6. Indicate 3 positions in the map using the 2D Pose Estimate tool, in the same way as you indicated the initial position of the robot in Step 3. A small green arrow should appear where you indicated the position, and a message should appear on the terminal where you launched the ```hack_my_robot_complete.launch file```. 
 7. Publish an empty message to the path_ready topic to run the routine once and save the positions in a file. 
