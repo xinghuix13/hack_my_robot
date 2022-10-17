@@ -19,7 +19,6 @@
     sudo nano 50-cloud-init.yaml
     ```
     ![](2022-10-17-10-35-43.png)
-
 4. ROS Network configuration.
    a. Adjust the parameters according to the IP addresses of your devices.
    b. Remote PC.
