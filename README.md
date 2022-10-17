@@ -9,9 +9,14 @@
    * [Robotis eManual](https://emanual.robotis.com/docs/en/platform/turtlebot3/sbc_setup/#sbc-setup)
    * Download and install Ubuntu on your PC (Remote PC). The recommended distribution is Noetic. You're free to install everything on a virtual machine, but performance wise it's going to be better if you partition your disk. 
    * Install dependent ROS packages and TurtleBot3 packages.
+   * Clone this repository on your ```catkin_ws``` workspace and build it. (You can also clone and run this node on the TurtleBot3, but performance wise we recommend you run it on your Remote PC)
+   ```
+   cd catkin_ws
+   catkin_make
+   ```
 3. Setup TurtleBot SBC.
    * Either follow [Robotis eManual](https://emanual.robotis.com/docs/en/platform/turtlebot3/sbc_setup/#sbc-setup) to flash their ROS image and set up the TurtleBot.
-   * Or flash the micro SD card with the provided [.img file]() from the HMR organisers. This image is built based on the one provided by Robotis in their tutorial, and you can achieve the same results by following the full tutorial.
+   * Or flash the micro SD card with the provided [.img file](https://drive.google.com/file/d/18IKNXmm-hT8XVjJUEMNhZLNY1hveEXTp/view?usp=sharing) from the HMR organisers. This image is built based on the one provided by Robotis in their tutorial, and you can achieve the same results by following the full tutorial.
    * Configure the WiFi Network Settings
       -  Open a terminal window and go to the ```/etc/netplan``` directory in the microSD card.
       - Edit the 50-cloud-init.yaml file to modify your WIFI_SSID and your WIFI_PASSWORD. 
