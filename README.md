@@ -18,7 +18,7 @@
     ```
     sudo nano 50-cloud-init.yaml
     ```
-    ![](2022-10-17-10-35-43.png)
+    ![](doc/images/2022-10-17-10-35-43.png)
 4. ROS Network configuration.
    a. Adjust the parameters according to the IP addresses of your devices.
    b. Remote PC.
@@ -73,7 +73,7 @@ The launch file located in ```hack_my_robot/launch/hack_my_robot_complete.launch
 roslaunch hack_my_robot hack_my_robot_complete.launch
 ```
 3. Setup your initial position.
-![](2022-10-17-10-37-55.png)
+![](doc/images/2022-10-17-10-37-55.png)
 4. Launch the keyboard teleoperation node in order to move your robot around so it can locate iself on the map (just spinning around should be enough).
 5. Once the robot has located itself, we need to change the functionality of the 2D Pose Estimate button. We will use the same tool in order to provide our robot the 3 waypoints needed for the Hack My Robot main routine. 
    a. Go to the Panels view and make the "Tools Properties" panel active.
