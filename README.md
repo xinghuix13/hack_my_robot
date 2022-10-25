@@ -9,7 +9,7 @@
    * [Robotis eManual](https://emanual.robotis.com/docs/en/platform/turtlebot3/sbc_setup/#sbc-setup)
    * Download and install Ubuntu on your PC (Remote PC). The recommended distribution is Noetic. You're free to install everything on a virtual machine, but performance wise it's going to be better if you partition your disk. 
    * Install dependent ROS packages and TurtleBot3 packages.
-   * Clone this repository on your ```catkin_ws``` workspace and build it. (You can also clone and run this node on the TurtleBot3, but performance wise we recommend you run it on your Remote PC)
+   * Clone this repository on your ```catkin_ws/src``` workspace and build it. (You can also clone and run this node on the TurtleBot3, but performance wise we recommend you run it on your Remote PC)
    ```
    cd catkin_ws
    catkin_make
@@ -27,18 +27,17 @@
 4. ROS Network configuration.
    * Adjust the parameters according to the IP addresses of your devices.
    * Remote PC.
-      - ROS_MASTER_URI=http://localhost:11311
+      - ROS_MASTER_URI=http://{IP_ADDRESS_OF_REMOTE_PC}:11311
       - ROS_IP={IP_ADDRESS_OF_REMOTE_PC}
-      - Include the IP address and hostname of the TurtleBot3 in your ```/etc/hosts``` file (if you don't do this, you might have issues communicating with the TurtleBot3 later on).
+      - Include the IP address and hostname of the TurtleBot3 in your ```/etc/hosts``` file (if you don't do this, you might have issues communicating with the TurtleBot3 later on). "nano /etc/hosts" and add a third line with the IP address and hostname of the turtlebot. 
   
    * TurtleBot3 SBC. 
       - ROS_MASTER_URI=http://{IP_ADDRESS_OF_REMOTE_PC}:11311
       - ROS_IP={IP_ADDRESS_OF_TURTLEBOT3}
-      - Include the IP address and hostname of your Remote PC in the TurtleBot3 ```/etc/hosts``` file (if you don't do this, you might have issues communicating with the TurtleBot3 later on).
-  
+      - Include the IP address and hostname of your Remote PC in the TurtleBot3 ```/etc/hosts``` file (if you don't do this, you might have issues communicating with the TurtleBot3 later on). "nano /etc/hosts" and add a third line with the IP address and hostname of the remote PC.
 5. Test your configuration.
    * Bringup your robot by following the [Robotis eManual](https://emanual.robotis.com/docs/en/platform/turtlebot3/bringup/#bringup).
-   * Test the [keyboard teleoperation](https://emanual.robotis.com/docs/en/platform/turtlebot3/basic_operation/) from your Remote PC to check if all the network configuration parameters have been properly set. If the robot is not moving, you probably need to recheck all the network parameters.  
+   * Test the [keyboard teleoperation](https://emanual.robotis.com/docs/en/platform/turtlebot3/basic_operation/) from your Remote PC to check if all the network configuration parameters have been properly set. If the robot is not moving, you probably need to recheck all the network parameters. (The bringup terminal in the preivous step show be running)  
 
 ### Mapping the scenario
 For further detailed information please refer to the [Robotis eManual](https://emanual.robotis.com/docs/en/platform/turtlebot3/slam/#run-slam-node).
@@ -77,6 +76,7 @@ The launch file located in ```hack_my_robot/launch/hack_my_robot_complete.launch
 ```
 roslaunch hack_my_robot hack_my_robot_complete.launch
 ```
+(if there is error coming out, for the new desktop, try to check the python version and installation.)
 3. Setup your initial position.
 ![](doc/images/2022-10-17-10-37-55.png)
 4. Launch the keyboard teleoperation node in order to move your robot around so it can locate iself on the map (just spinning around should be enough).
@@ -85,14 +85,15 @@ roslaunch hack_my_robot hack_my_robot_complete.launch
    * Change the topic of the 2D Pose Estimate tool from */initialpose* to */addpose*
     ![](doc/images/2022-10-17-11-04-31.png) 
    * Close the panel. 
-6. Indicate 3 positions in the map using the 2D Pose Estimate tool, in the same way as you indicated the initial position of the robot in Step 3. A small green arrow should appear where you indicated the position, and a message should appear on the terminal where you launched the ```hack_my_robot_complete.launch file```. 
+6. Indicate 3 scan positions in the map using the 2D Pose Estimate tool, in the same way as you indicated the initial position of the robot in Step 3. A small green arrow should appear where you indicated the position, and a message should appear on the terminal where you launched the ```hack_my_robot_complete.launch file```. 
 7. Publish an empty message to the path_ready topic to run the routine once and save the positions in a file. 
 ```
 rostopic pub -1 /path_ready std_msgs/Empty
 ```
-8. Wait until it finishes the routine. If all went well, the robot should have taken 3 pictures in the 3 locations you previously set. 
-9.  If you are happy with the routine, publish an empty message to the start_journey topic to start a loop. The routine will stop as soon as you stop publishing the message to the topic. 
+8. Indicate 1 final destination of the turtlebot in the map using the 2D Pose Estimate tool, in the same way as you indicated the initial position of the robot in Step 7. A small green arrow should appear where you indicated the position, and a message should appear on the terminal where you launched the ```hack_my_robot_complete.launch file```. The robot will start moving to the 3 scanning position automatically and come back to the 4th waypoint where you set as the final goal.
+9. Wait until it finishes the routine. If all went well, the robot should have taken 3 pictures in the 3 locations you previously set. (If the robot cannot move, or warnnings related to "timeout tolerance" try synchronize the time clock on Rasberry Pi and Remote PC.)
+10.  If you are happy with the routine, publish an empty message to the start_journey topic to start a loop. The routine will stop as soon as you stop publishing the message to the topic. 
 ```
 rostopic pub /start_journey std_msgs/Empty
 ```
-10.  Let's get hacking!!
+11.  Let's get hacking!!
